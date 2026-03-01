@@ -70,8 +70,7 @@
           </label>
           <label class="popup__label">
             <input type="url" name="place-link" id="place-link" class="popup__input popup__input_type_url"
-              placeholder="Ссылка на картинку" required pattern="^https?://[^\s]+$"
-              data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" />
+              placeholder="Ссылка на картинку" required pattern="^https?://[^\s]+\.[^\s]+$" />
             <span class="popup__error" id="place-link-error"></span>
           </label>
           <button type="submit" class="button popup__button popup__button_disabled" disabled>
@@ -111,7 +110,7 @@
         <form class="popup__form" name="edit-avatar" novalidate>
           <label class="popup__label">
             <input type="url" name="user-avatar" id="user-avatar" class="popup__input popup__input_type_avatar"
-              placeholder="Ссылка на изображение" required pattern="^https?://[^\s]+$" />
+              placeholder="Ссылка на изображение" required pattern="^https?://[^\s]+\.[^\s]+$" />
             <span class="popup__error" id="user-avatar-error"></span>
           </label>
           <button type="submit" class="button popup__button popup__button_disabled" disabled>
