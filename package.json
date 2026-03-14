@@ -22,5 +22,8 @@
   "homepage": "https://github.com/Yandex-Practicum/mesto-ad#readme",
   "devDependencies": {
     "vite": "^7.3.1"
+  },
+  "dependencies": {
+    "axios": "^1.13.6"
   }
 }
