@@ -6,6 +6,7 @@
   Из index.js не допускается что то экспортировать
 */
 
+import '../pages/index.css';
 import { getUserInfo, getCardList, setUserInfo, setUserAvatar, setNewCard, setDeleteCard, changeLikeStatus } from '/src/scripts/components/api.js';
 import { createCardElement, likeCard, deleteCard } from '/src/scripts/components/card.js';
 import { openModalWindow, closeModalWindow, setCloseModalWindowEventListeners } from '/src/scripts/components/modal.js';
