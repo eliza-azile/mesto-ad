@@ -17,8 +17,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-            node-version: '>=22.12'
-            cache: 'npm'
+          node-version: '20'
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm install
@@ -26,13 +26,22 @@ jobs:
       - name: Build project
         run: npm run build
 
+      - name: Debug build output
+        run: |
+          echo "=== Contents of dist folder ==="
+          ls -la dist/
+          echo "=== Contents of dist/assets folder ==="
+          ls -la dist/assets/ || echo "❌ assets folder not found!"
+          echo "=== Contents of dist/index.html ==="
+          cat dist/index.html | head -20
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           personal_token: ${{ secrets.PUBLIC_PAGES_TOKEN }}
           external_repository: ${{ secrets.PUBLIC_PAGES_REPO }}
           publish_dir: ./dist
-          publish_branch: ${{ secrets.PUBLIC_PAGES_BRANCH || 'main' }}
+          publish_branch: main
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
           commit_message: 'deploy: update build'
