@@ -40,8 +40,6 @@ let currentUser = null;
 // Загружаем данные пользователя и карточки
 Promise.all([getUserInfo(), getCardList()])
   .then(([userData, cardsData]) => {
-    console.log('Данные загружены:', { userData, cardsData });
-
     currentUser = userData;
 
     renderProfile(userData);
@@ -64,11 +62,7 @@ function renderProfile(userData) {
 }
 
 function renderCards(cards, currentUserId) {
-  console.log('renderCards вызван, currentUserId:', currentUserId);
-
   cards.forEach(card => {
-    console.log('Создаем карточку:', card.name, 'owner:', card.owner._id);
-
     const cardElement = createCardElement(card, {
       onPreviewPicture: (data) => openImagePopup(data),
       onLikeIcon: (likeButton) => {
@@ -86,18 +80,10 @@ function renderCards(cards, currentUserId) {
           .catch(err => console.error('Ошибка лайка:', err));
       },
       onDeleteCard: (cardElement) => {
-        console.log('onDeleteCard вызван для карточки:', card.name);
-        console.log('Сохраняем данные для удаления:', {
-          card: card,
-          id: card._id,
-          element: cardElement
-        });
-
         cardToDelete = card;
         cardToDeleteId = card._id;
         cardToDeleteElement = cardElement;
 
-        console.log('Открываем попап удаления');
         openModalWindow(removeCardPopup);
         setCloseModalWindowEventListeners(removeCardPopup);
       },
@@ -268,13 +254,8 @@ function setupPopups() {
   });
 
   //Попап подтверждения удаления
-  // Попап подтверждения удаления
   removeCardForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
-
-    console.log('Форма удаления отправлена');
-    console.log('cardToDeleteId:', cardToDeleteId);
-    console.log('cardToDeleteElement:', cardToDeleteElement);
 
     if (!cardToDeleteId || !cardToDeleteElement) {
       console.log('Нет карточки для удаления!');
@@ -285,8 +266,6 @@ function setupPopups() {
     const submitButton = removeCardForm.querySelector('.popup__button');
     const originalText = submitButton.textContent;
     submitButton.textContent = 'Удаление...';
-
-    console.log('Отправляем DELETE запрос для ID:', cardToDeleteId);
 
     setDeleteCard(cardToDeleteId)
       .then(() => {
